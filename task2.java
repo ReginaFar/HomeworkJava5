@@ -1,4 +1,8 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -46,5 +50,28 @@ public class task2 {
         listEmployees.put("Мечников", "Иван");
         listEmployees.put("Петин", "Петр");
         listEmployees.put("Ежов", "Иван");
+
+        Map<String, Integer> repetedValues = new HashMap<String, Integer>();
+        for (String name : listEmployees.values()) {
+            if (repetedValues.keySet().contains(name)) {
+                repetedValues.put(name, repetedValues.get(name) + 1);
+            } else {
+                repetedValues.put(name, 1);
+            }
+        }
+        System.out.println(repetedValues);
+
+        List<Integer> numbers = new ArrayList<Integer>(repetedValues.values());
+        numbers.sort(Collections.reverseOrder());
+
+        HashMap<String, Integer> sortedValues = new LinkedHashMap<String, Integer>();
+        for (int number : numbers) {
+            for (String name : repetedValues.keySet()) {
+                if (number == repetedValues.get(name)) {
+                    sortedValues.put(name, number);
+                }
+            }
+        }
+        System.out.println(sortedValues);
     }
 }
